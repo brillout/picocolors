@@ -1,17 +1,8 @@
-let tty;
-{
-  const req = require
-  try {
-    tty = req("tty")
-  } catch {}
-}
-
 let isColorSupported =
 	!("NO_COLOR" in process.env || process.argv.includes("--no-color")) &&
 	("FORCE_COLOR" in process.env ||
 		process.argv.includes("--color") ||
 		process.platform === "win32" ||
-		(tty && tty.isatty(1) && process.env.TERM !== "dumb") ||
 		"CI" in process.env)
 
 let formatter =
