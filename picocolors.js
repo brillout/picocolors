@@ -1,9 +1,4 @@
-let isColorSupported =
-	!("NO_COLOR" in process.env || process.argv.includes("--no-color")) &&
-	("FORCE_COLOR" in process.env ||
-		process.argv.includes("--color") ||
-		process.platform === "win32" ||
-		"CI" in process.env)
+let isColorSupported = false
 
 let formatter =
 	(open, close, replace = open) =>
