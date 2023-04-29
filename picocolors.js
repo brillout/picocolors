@@ -1,15 +1,13 @@
 const isColorSupported = (() => {
-	if (typeof process === "undefined") {
-		return true
-	}
+  const argv = process.argv || []
 
-	if ("NO_COLOR" in process.env || process.argv.includes("--no-color")) {
+	if ("NO_COLOR" in process.env || argv.includes("--no-color")) {
 		return false
 	}
 
 	if (
 		"FORCE_COLOR" in process.env ||
-		process.argv.includes("--color") ||
+		argv.includes("--color") ||
 		process.platform === "win32" ||
 		"CI" in process.env
 	) {
