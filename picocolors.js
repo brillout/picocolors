@@ -1,4 +1,32 @@
-let isColorSupported = false
+const isColorSupported = (() => {
+	if (typeof process === "undefined") {
+		return true
+	}
+
+	if ("NO_COLOR" in process.env || process.argv.includes("--no-color")) {
+		return false
+	}
+
+	if (
+		"FORCE_COLOR" in process.env ||
+		process.argv.includes("--color") ||
+		process.platform === "win32" ||
+		"CI" in process.env
+	) {
+		return true
+	}
+
+	{
+		let tty
+		try {
+			const req = require
+			tty = req("tty")
+		} catch {
+			return false
+		}
+		return tty.isatty(1) && process.env.TERM !== "dumb"
+	}
+})()
 
 let formatter =
 	(open, close, replace = open) =>
