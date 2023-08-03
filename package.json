@@ -6,9 +6,7 @@
   "version": "1.0.5",
   "main": "./picocolors.js",
   "types": "./picocolors.d.ts",
-  "browser": {
-    "./picocolors.js": "./picocolors.browser.js"
-  },
+  "browser": "./picocolors.browser.mjs",
   "sideEffects": false,
   "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors",
   "scripts": {
