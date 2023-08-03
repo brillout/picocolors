@@ -1,5 +1,5 @@
 const isColorSupported = (() => {
-  const argv = process.argv || []
+	const argv = process.argv || []
 
 	if ("NO_COLOR" in process.env || argv.includes("--no-color")) {
 		return false
