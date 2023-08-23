@@ -78,6 +78,14 @@ module.exports = createColors()
 module.exports.createColors = createColors
 
 function isBrowser() {
-	// Using `typeof window !== 'undefined'` alone is not enough because some users use https://www.npmjs.com/package/ssr-window
+	/* We don't use this check in order to tolerate jsdom environments to load this file.
 	return typeof window !== "undefined" && typeof window.scrollY === "number"
+  */
+	// Test whether whether the environment is a *real* browser.
+	//  - https://github.com/jsdom/jsdom/issues/1537#issuecomment-1689368267
+	return (
+		Object.getOwnPropertyDescriptor(globalThis, "window")
+			?.get?.toString()
+			.includes("[native code]") ?? false
+	)
 }
