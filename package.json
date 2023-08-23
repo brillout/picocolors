@@ -10,7 +10,8 @@
   "sideEffects": false,
   "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors",
   "scripts": {
-    "test": "node tests/test.js"
+    "test": "node tests/test.js",
+    "release": "npm version patch && npm publish && git push && git push --tags"
   },
   "files": [
     "picocolors.*",
