@@ -1,4 +1,5 @@
-export type Formatter = (input: string | number | null | undefined) => string
+// export type Formatter = (input: string | number | null | undefined) => string
+export type Formatter = <T extends string>(input: T) => T
 
 export interface Colors {
 	isColorSupported: boolean
