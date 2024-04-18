@@ -1,2 +1,7 @@
-const v=new Proxy((s) => s,{get:()=>v})
-export default v
+export default new Proxy(
+  {},
+  {
+    get: (_, p) =>
+      (s) => p !== 'code' ? s : `\`${s}\``
+  }
+)

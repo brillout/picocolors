@@ -45,8 +45,11 @@ let replaceClose = (string, close, replace, index) => {
 	return ~nextIndex ? start + replaceClose(end, close, replace, nextIndex) : start + end
 }
 
-let createColors = (enabled = isColorSupported) => ({
+let createColors = (enabled = isColorSupported) => {
+	const cyan = formatter("\x1b[36m", "\x1b[39m")
+	return {
 	isColorSupported: enabled,
+	code: enabled ? cyan : (s) => `\`${s}\``,
 	reset: enabled ? s => `\x1b[0m${s}\x1b[0m` : String,
 	bold: enabled ? formatter("\x1b[1m", "\x1b[22m", "\x1b[22m\x1b[1m") : String,
 	dim: enabled ? formatter("\x1b[2m", "\x1b[22m", "\x1b[22m\x1b[2m") : String,
@@ -61,7 +64,7 @@ let createColors = (enabled = isColorSupported) => ({
 	yellow: enabled ? formatter("\x1b[33m", "\x1b[39m") : String,
 	blue: enabled ? formatter("\x1b[34m", "\x1b[39m") : String,
 	magenta: enabled ? formatter("\x1b[35m", "\x1b[39m") : String,
-	cyan: enabled ? formatter("\x1b[36m", "\x1b[39m") : String,
+	cyan: enabled ? cyan : String,
 	white: enabled ? formatter("\x1b[37m", "\x1b[39m") : String,
 	gray: enabled ? formatter("\x1b[90m", "\x1b[39m") : String,
 	bgBlack: enabled ? formatter("\x1b[40m", "\x1b[49m") : String,
@@ -72,7 +75,8 @@ let createColors = (enabled = isColorSupported) => ({
 	bgMagenta: enabled ? formatter("\x1b[45m", "\x1b[49m") : String,
 	bgCyan: enabled ? formatter("\x1b[46m", "\x1b[49m") : String,
 	bgWhite: enabled ? formatter("\x1b[47m", "\x1b[49m") : String,
-})
+	}
+}
 
 module.exports = createColors()
 module.exports.createColors = createColors
