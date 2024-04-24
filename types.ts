@@ -3,6 +3,7 @@ export type Formatter = <T extends string>(input: T) => T
 
 export interface Colors {
 	isColorSupported: boolean
+	rm: Formatter
 	code: Formatter
 	reset: Formatter
 	bold: Formatter
