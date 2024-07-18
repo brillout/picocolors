@@ -5,6 +5,7 @@ export interface Colors {
 	isColorSupported: boolean
 	rm: Formatter
 	code: Formatter
+	string: Formatter
 	reset: Formatter
 	bold: Formatter
 	dim: Formatter

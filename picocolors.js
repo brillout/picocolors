@@ -50,6 +50,7 @@ let createColors = (enabled = isColorSupported) => {
 	return {
 	isColorSupported: enabled,
 	code: enabled ? cyan : (s) => `\`${s}\``,
+	string: enabled ? cyan : (s) => `'${s}'`,
 	reset: enabled ? s => `\x1b[0m${s}\x1b[0m` : String,
 	bold: enabled ? formatter("\x1b[1m", "\x1b[22m", "\x1b[22m\x1b[1m") : String,
 	dim: enabled ? formatter("\x1b[2m", "\x1b[22m", "\x1b[22m\x1b[2m") : String,
