@@ -1,6 +1,10 @@
 if (isBrowser()) throw new Error("This file should never be included in the browser.")
 
 const isColorSupported = (() => {
+	if (typeof process === 'undefined') {
+		return false
+	}
+
 	const argv = process.argv || []
 
 	if ("NO_COLOR" in process.env || argv.includes("--no-color")) {
