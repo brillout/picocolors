@@ -10,13 +10,14 @@ const isColorSupported = (() => {
 	if (
 		"FORCE_COLOR" in process.env ||
 		argv.includes("--color") ||
-		process.platform === "win32" ||
 		"CI" in process.env
 	) {
 		return true
 	}
 
-	{
+	if (process.platform === "win32") {
+		return true
+	} else {
 		let tty
 		try {
 			const req = require
