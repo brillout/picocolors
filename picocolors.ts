@@ -89,9 +89,3 @@ function getAnsiRegex() {
   ].join('|')
   return new RegExp(pattern, 'g')
 }
-
-// CJS default export `const mod = require('some-package')`
-//  - It needs to live at the end of this file, in order to ensure we do it after all assignments to `exports`.
-try {
-  module.exports = Object.assign(exports.default, exports)
-} catch {}
