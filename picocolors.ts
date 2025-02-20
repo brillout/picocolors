@@ -1,6 +1,6 @@
 if (isBrowser()) throw new Error("This file should never be included in the browser.")
 
-const p = process || {}, argv = p.argv || [], env = p.env || {}
+const p = typeof process === "undefined" ? ({} as Partial<typeof process>) : process, argv = p.argv || [], env = p.env || {}
 const isColorSupported =
 	!(!!env.NO_COLOR || argv.includes("--no-color")) &&
 	(!!env.FORCE_COLOR || argv.includes("--color") || p.platform === "win32" || ((p.stdout || {}).isTTY && env.TERM !== "dumb") || !!env.CI)
