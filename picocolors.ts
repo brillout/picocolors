@@ -34,8 +34,8 @@ const isColorSupported = (() => {
 })()
 
 let formatter =
-	(open, close, replace = open) =>
-	input => {
+	(open: string, close: string, replace = open) =>
+	(input: string) => {
 		let string = "" + input
 		let index = string.indexOf(close, open.length)
 		return ~index
@@ -43,7 +43,7 @@ let formatter =
 			: open + string + close
 	}
 
-let replaceClose = (string, close, replace, index) => {
+let replaceClose = (string: string, close: string, replace: string, index: number): string => {
 	let start = string.substring(0, index) + replace
 	let end = string.substring(index + close.length)
 	let nextIndex = end.indexOf(close)
@@ -54,9 +54,9 @@ let createColors = (enabled = isColorSupported) => {
 	const cyan = formatter("\x1b[36m", "\x1b[39m")
 	return {
 	isColorSupported: enabled,
-	code: enabled ? cyan : (s) => `\`${s}\``,
-	string: enabled ? cyan : (s) => `'${s}'`,
-	reset: enabled ? s => `\x1b[0m${s}\x1b[0m` : String,
+	code: enabled ? cyan : (s: string) => `\`${s}\``,
+	string: enabled ? cyan : (s: string) => `'${s}'`,
+	reset: enabled ? (s: string) => `\x1b[0m${s}\x1b[0m` : String,
 	bold: enabled ? formatter("\x1b[1m", "\x1b[22m", "\x1b[22m\x1b[1m") : String,
 	dim: enabled ? formatter("\x1b[2m", "\x1b[22m", "\x1b[22m\x1b[2m") : String,
 	italic: enabled ? formatter("\x1b[3m", "\x1b[23m") : String,
@@ -84,9 +84,10 @@ let createColors = (enabled = isColorSupported) => {
 	}
 }
 
-module.exports = createColors()
-module.exports.createColors = createColors
-module.exports.rm = stripAnsi
+const pc = createColors()
+export default pc
+export { pc }
+export { stripAnsi as rm }
 
 function isBrowser() {
 	/* We don't use this check in order to tolerate jsdom environments to load this file.
@@ -102,7 +103,7 @@ function isBrowser() {
 }
 
 // Copied from https://github.com/chalk/strip-ansi/blob/1fdc531d4046cbaa830460f5c74452bf1f0a0884/index.js
-function stripAnsi(string) {
+function stripAnsi(string: string) {
   // Even though the regex is global, we don't need to reset the `.lastIndex`
   // because unlike `.exec()` and `.test()`, `.replace()` does it automatically
   // and doing it manually has a performance penalty.

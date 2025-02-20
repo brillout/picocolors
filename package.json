@@ -4,17 +4,22 @@
     "access": "public"
   },
   "version": "1.0.15",
-  "main": "./picocolors.js",
-  "types": "./picocolors.d.ts",
-  "browser": "./picocolors.browser.mjs",
+  "module": "./dist/esm/picocolors.js",
+  "types": "./dist/esm/picocolors.d.ts",
+  "main": "./dist/cjs/picocolors.js",
+  "browser": "./dist/esm/picocolors.browser.js",
   "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors",
   "scripts": {
-    "test": "node tests/test.js",
-    "release": "npm version patch && npm publish && git push && git push --tags"
+    "dev": "tsc --watch",
+    "build": "rm -rf dist/ && pnpm run build:esm && pnpm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --project ./tsconfig.cjs.json",
+    "prepublishOnly": "pnpm run build",
+    "release": "npm version patch && npm publish && git push && git push --tags",
+    "reset": "git clean -Xdf && pnpm install && pnpm run build"
   },
   "files": [
-    "picocolors.*",
-    "types.ts"
+    "dist/"
   ],
   "keywords": [
     "terminal",
@@ -27,6 +32,7 @@
   "repository": "alexeyraspopov/picocolors",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "18.11.9",
     "ansi-colors": "^4.1.1",
     "benchmark": "^2.1.4",
     "chalk": "^4.1.2",
@@ -35,7 +41,8 @@
     "colorette": "^2.0.12",
     "kleur": "^4.1.4",
     "nanocolors": "^0.2.12",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "typescript": "^4.9.5"
   },
   "prettier": {
     "printWidth": 100,
