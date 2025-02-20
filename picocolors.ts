@@ -86,7 +86,6 @@ let createColors = (enabled = isColorSupported) => {
 
 const pc = createColors()
 export default pc
-export { pc }
 export { stripAnsi as rm }
 
 function isBrowser() {
