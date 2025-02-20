@@ -1,37 +1,9 @@
 if (isBrowser()) throw new Error("This file should never be included in the browser.")
 
-const isColorSupported = (() => {
-	if (typeof process === 'undefined') {
-		return false
-	}
-
-	const argv = process.argv || []
-
-	if ("NO_COLOR" in process.env || argv.includes("--no-color")) {
-		return false
-	}
-
-	if (
-		"FORCE_COLOR" in process.env ||
-		argv.includes("--color") ||
-		"CI" in process.env
-	) {
-		return true
-	}
-
-	if (process.platform === "win32") {
-		return true
-	} else {
-		let tty
-		try {
-			const req = require
-			tty = req("tty")
-		} catch {
-			return false
-		}
-		return tty.isatty(1) && process.env.TERM !== "dumb"
-	}
-})()
+const p = process || {}, argv = p.argv || [], env = p.env || {}
+const isColorSupported =
+	!(!!env.NO_COLOR || argv.includes("--no-color")) &&
+	(!!env.FORCE_COLOR || argv.includes("--color") || p.platform === "win32" || ((p.stdout || {}).isTTY && env.TERM !== "dumb") || !!env.CI)
 
 let formatter =
 	(open: string, close: string, replace = open) =>
