@@ -12,6 +12,7 @@
     "worker": "./dist/esm/picocolors.js",
     "browser": "./dist/esm/picocolors.browser.js",
     "require": "./dist/cjs/picocolors.js",
+    "types": "./picocolors.d.ts",
     "default": "./dist/esm/picocolors.js"
   },
   "type": "module",
