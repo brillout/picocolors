@@ -4,17 +4,25 @@
     "access": "public"
   },
   "version": "1.0.22",
-  "module": "./dist/esm/picocolors.js",
   "// We don't use ./dist/esm/picocolors.d.ts because of what seems to be a TypeScript bug": "",
   "types": "./picocolors.d.ts",
-  "main": "./dist/cjs/picocolors.js",
+  "module": "./dist/esm/picocolors.js",
   "browser": "./dist/esm/picocolors.browser.js",
+  "exports": {
+    "worker": "./dist/esm/picocolors.js",
+    "browser": "./dist/esm/picocolors.browser.js",
+    "require": "./dist/cjs/picocolors.js",
+    "default": "./dist/esm/picocolors.js"
+  },
+  "type": "module",
   "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors",
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && pnpm run build:esm && pnpm run build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --project ./tsconfig.cjs.json",
+    "build:cjs": "pnpm run build:cjs:ts && pnpm run build:cjs:fixup",
+    "build:cjs:ts": "tsc --project ./tsconfig.cjs.json",
+    "build:cjs:fixup": "node ./dist-cjs-fixup.mjs",
     "prepublishOnly": "pnpm run build",
     "release": "npm version patch && npm publish && git push && git push --tags",
     "reset": "git clean -Xdf && pnpm install && pnpm run build"
