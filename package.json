@@ -29,7 +29,6 @@
   },
   "files": [
     "picocolors.d.ts",
-    "types.ts",
     "dist/"
   ],
   "keywords": [
