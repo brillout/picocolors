@@ -5,7 +5,8 @@
   },
   "version": "1.0.16",
   "module": "./dist/esm/picocolors.js",
-  "types": "./dist/esm/picocolors.d.ts",
+  "// We don't use ./dist/esm/picocolors.d.ts because of what seems to be a TypeScript bug": "",
+  "types": "./picocolors.d.ts",
   "main": "./dist/cjs/picocolors.js",
   "browser": "./dist/esm/picocolors.browser.js",
   "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors",
@@ -19,6 +20,7 @@
     "reset": "git clean -Xdf && pnpm install && pnpm run build"
   },
   "files": [
+    "picocolors.d.ts",
     "dist/"
   ],
   "keywords": [
