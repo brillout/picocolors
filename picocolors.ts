@@ -53,12 +53,12 @@ let createColors = (enabled = isColorSupported) => {
 	bgMagenta: enabled ? formatter("\x1b[45m", "\x1b[49m") : String,
 	bgCyan: enabled ? formatter("\x1b[46m", "\x1b[49m") : String,
 	bgWhite: enabled ? formatter("\x1b[47m", "\x1b[49m") : String,
+	rm: stripAnsi,
 	}
 }
 
 const pc = createColors()
 export default pc
-export { stripAnsi as rm }
 
 function isBrowser() {
 	/* We don't use this check in order to tolerate jsdom environments to load this file.
