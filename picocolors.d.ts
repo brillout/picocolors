@@ -34,4 +34,5 @@ interface Colors {
        bgMagenta: Formatter
        bgCyan: Formatter
        bgWhite: Formatter
+       rm: Formatter
 }
