@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.29",
+  "version": "1.0.30",
   "// We don't use ./dist/picocolors.d.ts because of what seems to be a TypeScript bug": "",
   "types": "./picocolors.d.ts",
   "module": "./dist/picocolors.js",
