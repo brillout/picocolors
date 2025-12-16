@@ -2,6 +2,8 @@ if (isBrowser()) throw new Error("This file should never be included in the brow
 
 const p = typeof process === "undefined" ? ({} as Partial<typeof process>) : process, argv = p.argv || [], env = p.env || {}
 const isColorSupported =
+	// Needed for Cloudflare Workers, see https://github.com/cloudflare/workers-sdk/issues/11589
+	(globalThis as any).__VIKE__IS_DEV ||
 	!(!!env.NO_COLOR || argv.includes("--no-color")) &&
 	(!!env.FORCE_COLOR || argv.includes("--color") || p.platform === "win32" || ((p.stdout || {}).isTTY && env.TERM !== "dumb") || !!env.CI)
 
