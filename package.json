@@ -4,15 +4,15 @@
     "access": "public"
   },
   "version": "1.0.29",
-  "// We don't use ./dist/esm/picocolors.d.ts because of what seems to be a TypeScript bug": "",
+  "// We don't use ./dist/picocolors.d.ts because of what seems to be a TypeScript bug": "",
   "types": "./picocolors.d.ts",
-  "module": "./dist/esm/picocolors.js",
-  "browser": "./dist/esm/picocolors.browser.js",
+  "module": "./dist/picocolors.js",
+  "browser": "./dist/picocolors.browser.js",
   "exports": {
-    "worker": "./dist/esm/picocolors.js",
-    "browser": "./dist/esm/picocolors.browser.js",
+    "worker": "./dist/picocolors.js",
+    "browser": "./dist/picocolors.browser.js",
     "types": "./picocolors.d.ts",
-    "default": "./dist/esm/picocolors.js"
+    "default": "./dist/picocolors.js"
   },
   "type": "module",
   "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors",
