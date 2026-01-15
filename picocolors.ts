@@ -62,17 +62,12 @@ let createColors = (enabled = isColorSupported) => {
 const pc = createColors()
 export default pc
 
+/** Test whether the environment is a *real* browser (not a browser simulation such as `jsdom`). */
 function isBrowser() {
-	/* We don't use this check in order to tolerate jsdom environments to load this file.
-	return typeof window !== "undefined" && typeof window.scrollY === "number"
-  */
-	// Test whether whether the environment is a *real* browser.
-	//  - https://github.com/jsdom/jsdom/issues/1537#issuecomment-1689368267
-	return (
-		Object.getOwnPropertyDescriptor(globalThis, "window")
-			?.get?.toString()
-			.includes("[native code]") ?? false
-	)
+  // - Using `typeof window !== 'undefined'` alone isn't narrow enough because some users use https://www.npmjs.com/package/ssr-window
+  // - Using `typeof window !== "undefined" && typeof window.scrollY === "number"` still isn't narrow enough because of jsdom
+  // - https://github.com/jsdom/jsdom/issues/1537#issuecomment-1689368267
+  return Object.getOwnPropertyDescriptor(globalThis, 'window')?.get?.toString().includes('[native code]') ?? false
 }
 
 // Copied from https://github.com/chalk/strip-ansi/blob/1fdc531d4046cbaa830460f5c74452bf1f0a0884/index.js
