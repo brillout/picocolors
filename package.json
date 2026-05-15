@@ -1,5 +1,6 @@
 {
   "name": "@brillout/picocolors",
+  "repository": "https://github.com/brillout/picocolors",
   "publishConfig": {
     "access": "public"
   },
@@ -35,7 +36,6 @@
     "console"
   ],
   "author": "Alexey Raspopov",
-  "repository": "alexeyraspopov/picocolors",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "18.11.9",
